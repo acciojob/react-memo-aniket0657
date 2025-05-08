@@ -1,42 +1,30 @@
-
-
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import UseMemo from "./UseMemo";
+import ReactMemo from "./ReactMemo";
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
-  const [input, setInput] = useState("");
 
-  const onInput = (e) => {
-    const { value } = e.target;
-    setInput(value);
-  };
   const onAdd = () => {
-    setTasks((prev) => [...prev, input]);
-    setInput("");
-  };
-
-  const onDelet = (ind) => {
-    const newTasks = [...tasks];
-    newTasks.splice(ind, 1);
-    setTasks(newTasks);
+    setTasks((prev) => [...prev, "New Todo"]);
   };
   return (
-    <div>
-      <p>To-Do List</p>
-
-      <div>
-        <input value={input} onChange={onInput} />
-        <button onClick={onAdd}>Add Todo</button>
-      </div>
+    <div id="main">
+      <h1>React.useMemo</h1>
+      <h2>My todos</h2>
       <ul>
-        {tasks.map((item, index) => (
-          <li key={index}>
-            <span>{item}</span>
-            <button onClick={() => onDelet(index)}>Delete</button>
-          </li>
+        {tasks.map((i, index) => (
+          <li key={index}>{i}</li>
         ))}
       </ul>
+
+      <button onClick={onAdd}>Add Todo</button>
+
+      <hr />
+      <UseMemo />
+      <hr />
+      <hr />
+      <ReactMemo />
     </div>
   );
 };
